@@ -50,13 +50,13 @@ const storage = new Map([
 const { context: c, elements } = makeRuntime(storage);
 const catalog = vm.runInContext('products', c);
 
-assert.equal(catalog.length, 12);
+assert.equal(catalog.length, 21);
 assert.equal(c.inventory(), 0);
 assert.deepEqual(Array.from(vm.runInContext('wishlist', c)), []);
 assert.equal(storage.has('ym_demo_products'), false);
 assert.equal(storage.has('ym_demo_cart'), false);
-assert.equal(storage.get('yviora_catalog_v3'), 'done');
-assert.deepEqual(Array.from(catalog, product => product.image), ['keychain_1.jpg','keychain_2.jpg','keychain_3.jpg','keychain_4.jpg','keychain_5.jpg','keychain_6.jpg','keychain_7.jpg','keychain_8.jpg','keychain_9.jpg','cap_1.jpg','cap_2.jpg','cap_3.jpg']);
+assert.equal(storage.get('yviora_catalog_v4'), 'done');
+assert.deepEqual(Array.from(catalog, product => product.image), ['keychain_1.jpg','keychain_2.jpg','keychain_3.jpg','keychain_4.jpg','keychain_5.jpg','keychain_6.jpg','keychain_7.jpg','keychain_8.jpg','keychain_9.jpg','cap_1.jpg','cap_2.jpg','cap_3.jpg','bag_1.jpg','bag_2.jpg','bag_3.jpg','bag_4.jpg','bag_5.jpg','bag_6.jpg','bag_7.jpg','bag_8.jpg','bag_9.jpg']);
 assert.ok(Array.from(catalog).every(product => product.price === null && product.stock === null));
 assert.equal(c.document.title, 'Yviora — Little Finds, Lovely Prices');
 assert.match(elements.get('app').innerHTML, /Little finds to love/);
@@ -65,16 +65,20 @@ assert.doesNotMatch(elements.get('site-footer').innerHTML, /mahika/i);
 
 c.location.hash = '#/shop';
 c.render();
-assert.match(elements.get('app').innerHTML, /12 finds/);
+assert.match(elements.get('app').innerHTML, /21 finds/);
 for (let i = 1; i <= 9; i++) assert.match(elements.get('app').innerHTML, new RegExp('keychain_' + i + '\\.jpg'));
-assert.equal((elements.get('app').innerHTML.match(/class="product-card"/g) || []).length, 12);
-assert.equal((elements.get('app').innerHTML.match(/Coming soon/g) || []).length, 24);
+assert.equal((elements.get('app').innerHTML.match(/class="product-card"/g) || []).length, 21);
+assert.equal((elements.get('app').innerHTML.match(/Coming soon/g) || []).length, 42);
 assert.doesNotMatch(elements.get('app').innerHTML, /₱0/);
 
 c.location.hash = '#/shop?category=caps';
 c.render();
 assert.match(elements.get('app').innerHTML, /3 finds/);
 for (let i = 1; i <= 3; i++) assert.match(elements.get('app').innerHTML, new RegExp('cap_' + i + '\\.jpg'));
+c.location.hash = '#/shop?category=bags';
+c.render();
+assert.match(elements.get('app').innerHTML, /9 finds/);
+for (let i = 1; i <= 9; i++) assert.match(elements.get('app').innerHTML, new RegExp('bag_' + i + '\\.jpg'));
 c.location.hash = '#/product/strawberry-shortcake-keychain';
 c.render();
 assert.match(elements.get('app').innerHTML, /Strawberry Shortcake Keychain/);
@@ -107,7 +111,7 @@ assert.equal(JSON.parse(storage.get('yviora_theme')), 'dark');
 
 const fresh = makeRuntime(storage);
 assert.equal(fresh.context.document.documentElement.dataset.theme, 'dark');
-assert.equal(vm.runInContext('products.length', fresh.context), 12);
+assert.equal(vm.runInContext('products.length', fresh.context), 21);
 
 const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(__dirname, 'styles.css'), 'utf8');
@@ -122,4 +126,5 @@ assert.match(css, /prefers-reduced-motion/);
 for (let i = 1; i <= 9; i++) assert.ok(fs.existsSync(path.join(__dirname, 'keychain_' + i + '.jpg')), 'keychain_' + i + '.jpg should exist');
 
 for (const file of ['cap_1.jpg','cap_2.jpg','cap_3.jpg']) assert.ok(fs.existsSync(path.join(__dirname,file)));
-console.log('Storefront smoke checks passed: twelve products including nine keychains and three caps, pending price/stock handling, migration, product detail/cart availability, persistent dark mode, and responsive theme styles.');
+for (let i = 1; i <= 9; i++) assert.ok(fs.existsSync(path.join(__dirname, 'bag_' + i + '.jpg')));
+console.log('Storefront smoke checks passed: twenty-one products including nine keychains, three caps, and nine bags, pending price/stock handling, migration, product detail/cart availability, persistent dark mode, and responsive theme styles.');
