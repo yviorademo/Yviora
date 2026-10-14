@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff9f5">
+  <meta name="description" content="Discover cute accessories, everyday essentials, and lovely little finds at Yviora.">
+  <title>Yviora — Little Finds, Lovely Prices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="announcement"><span>♡</span> Cute finds, lovely prices! <span class="announcement-divider">·</span> Curated with love in the Philippines <span>♡</span></div>
+  <header class="site-header">
+    <a class="brand" href="#/" aria-label="Yviora home"><span class="brand-mark" aria-hidden="true">☾</span><span class="brand-name">yviora<small>little finds, lovely prices</small></span></a>
+    <button class="mobile-menu-toggle icon-button" aria-label="Open menu" aria-expanded="false" id="menu-toggle"><span class="hamburger"></span></button>
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <a href="#/">Home</a><a href="#/shop">Shop All</a><a href="#/shop?category=jewelry">Jewelry &amp; Accessories</a><a href="#/shop?category=bags">Bags &amp; Everyday</a><a href="#/shop?category=cute">Cute Finds</a><a href="#/shop?category=lifestyle">Lifestyle Finds</a><a href="#/about">About Us</a><a href="#/contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" id="search-toggle" aria-label="Search products"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg></button>
+      <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch color theme">☾</button>
+      <a class="icon-button account-action" href="#/account" aria-label="Customer account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"></circle><path d="M5.2 20c.5-3.2 2.9-5 6.8-5s6.3 1.8 6.8 5"></path></svg></a>
+      <a class="icon-button cart-action" href="#/cart" aria-label="Shopping cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.3 11.1a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 1.9-1.5L21 8H6"></path><circle cx="9.5" cy="20" r="1"></circle><circle cx="17.5" cy="20" r="1"></circle></svg><span class="cart-count" id="cart-count">0</span></a>
+    </div>
+  </header>
+  <div class="search-panel" id="search-panel" hidden><form id="global-search"><label class="sr-only" for="global-search-input">Search products</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg><input id="global-search-input" placeholder="Search for something lovely…" autocomplete="off"><button type="submit" class="text-button">Search</button><button type="button" class="icon-button close-search" id="search-close" aria-label="Close search">×</button></form></div>
+  <main id="app" tabindex="-1"></main>
+  <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <footer id="site-footer"></footer>
+  <script src="app.js"></script>
+</body>
+</html>
